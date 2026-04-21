@@ -15,8 +15,8 @@ public class IntBox {
         return valore;
     }
 
-    public void setValore() {
-        this.valore = 1;
+    public void setValore(int valore) {
+        this.valore = valore;
     }
    
    public void resetValore(){
