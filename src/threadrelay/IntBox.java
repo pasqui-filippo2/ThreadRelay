@@ -9,5 +9,18 @@ package threadrelay;
  * @author pasqui.filippo
  */
 public class IntBox {
-    
+   private int valore;// 0 libero , 1 occupato
+
+    public int getValore() {
+        return valore;
+    }
+
+    public void setValore() {
+        this.valore = 1;
+    }
+   
+   public void resetValore(){
+       this.valore=0;
+   }
+   
 }
