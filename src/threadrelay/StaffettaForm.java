@@ -17,6 +17,27 @@ public class StaffettaForm extends javax.swing.JFrame implements Observer {
      */
     public StaffettaForm() {
         initComponents();
+        this.getContentPane().setBackground(new java.awt.Color(33, 37, 41));
+
+    // Configurazione bar1 (Verde)
+    bar1.setForeground(new java.awt.Color(40, 167, 69));
+    bar1.setStringPainted(true);
+    bar1.setString("Atleta 1: Pronto");
+
+    // Configurazione bar2 (Blu)
+    bar2.setForeground(new java.awt.Color(0, 123, 255));
+    bar2.setStringPainted(true);
+    bar2.setString("Atleta 2: In attesa");
+
+    // Configurazione bar3 (Giallo)
+    bar3.setForeground(new java.awt.Color(255, 193, 7));
+    bar3.setStringPainted(true);
+    bar3.setString("Atleta 3: In attesa");
+
+    // Configurazione bar4 (Rosso)
+    bar4.setForeground(new java.awt.Color(220, 53, 69));
+    bar4.setStringPainted(true);
+    bar4.setString("Atleta 4: In attesa");
     }
 
     /**
@@ -125,15 +146,23 @@ public class StaffettaForm extends javax.swing.JFrame implements Observer {
         switch (idAtleta){
             case 1:
                 bar1.setValue(progresso);
+                if(progresso < 100) bar1.setString("Atleta 1: CORRE (" + progresso + "%)");
+                else bar1.setString("Atleta 1: FINE");
                 break;
             case 2:
                 bar2.setValue(progresso);
+                if(progresso < 100) bar2.setString("Atleta 2: CORRE (" + progresso + "%)");
+                else bar2.setString("Atleta 2: FINE");
                 break;
             case 3:
                 bar3.setValue(progresso);
+                if(progresso < 100) bar3.setString("Atleta 3: CORRE (" + progresso + "%)");
+                else bar3.setString("Atleta 3: FINE");
                 break;
             case 4:
                 bar4.setValue(progresso);
+                if(progresso < 100) bar4.setString("Atleta 4: CORRE (" + progresso + "%)");
+                else bar4.setString("Atleta 4: FINE");
                 break;
             
             
