@@ -14,7 +14,8 @@ public class ThreadRelay {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        StaffettaForm f1=new StaffettaForm();
+        f1.setVisible(true);
     }
     
 }

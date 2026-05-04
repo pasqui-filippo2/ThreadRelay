@@ -22,6 +22,7 @@ public class AtletaStaffetta extends Thread implements Subject {
 
     @Override
     public void run() {
+        
         while(box.getValore()!=atleta){
             
           try {Thread.sleep(10);} catch (InterruptedException ex) {System.getLogger(AtletaStaffetta.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);}
@@ -42,12 +43,12 @@ public class AtletaStaffetta extends Thread implements Subject {
 
     @Override
     public void addObserver(Observer o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.o=o;
     }
 
     @Override
     public void removeObserver(Observer o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 
     @Override
