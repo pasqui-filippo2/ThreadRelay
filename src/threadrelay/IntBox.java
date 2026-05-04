@@ -9,17 +9,17 @@ package threadrelay;
  * @author pasqui.filippo
  */
 public class IntBox {
-   private int valore;// 0 libero , 1 occupato
+   private int valore=1;
 
-    public int getValore() {
+    public synchronized int getValore() {
         return valore;
     }
 
-    public void setValore(int valore) {
+    public synchronized void setValore(int valore) {
         this.valore = valore;
     }
    
-   public void resetValore(){
+   public synchronized void resetValore(){
        this.valore=0;
    }
    

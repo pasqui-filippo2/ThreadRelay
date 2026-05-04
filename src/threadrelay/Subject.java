@@ -11,5 +11,5 @@ package threadrelay;
 public interface Subject {
     public void addObserver(Observer o);
     public void removeObserver(Observer o);
-    public void notifyObserver(Observer o);
+    public void notifyObserver(int progress);
 }
