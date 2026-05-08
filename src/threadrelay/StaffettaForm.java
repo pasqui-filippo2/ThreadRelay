@@ -4,6 +4,8 @@
  */
 package threadrelay;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author pasqui.filippo
@@ -11,12 +13,11 @@ package threadrelay;
 public class StaffettaForm extends javax.swing.JFrame implements Observer {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(StaffettaForm.class.getName());
-
-    /**
-     * Creates new form StaffettaForm
-     */
+    private IntBox box;
+    private ArrayList<AtletaStaffetta> listaAtleti= new ArrayList<>();
     public StaffettaForm() {
         initComponents();
+        box=new IntBox();
         this.getContentPane().setBackground(new java.awt.Color(33, 37, 41));
 
     // Configurazione bar1 (Verde)
@@ -54,8 +55,13 @@ public class StaffettaForm extends javax.swing.JFrame implements Observer {
         bar3 = new javax.swing.JProgressBar();
         btnStart = new javax.swing.JButton();
         bar4 = new javax.swing.JProgressBar();
+        btnStop = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(bar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 50, 353, 21));
+        getContentPane().add(bar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 83, 353, 22));
+        getContentPane().add(bar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 111, 353, 20));
 
         btnStart.setText("START");
         btnStart.addActionListener(new java.awt.event.ActionListener() {
@@ -63,50 +69,46 @@ public class StaffettaForm extends javax.swing.JFrame implements Observer {
                 btnStartActionPerformed(evt);
             }
         });
+        getContentPane().add(btnStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 180, 130, -1));
+        getContentPane().add(bar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 143, 353, 21));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(bar4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bar1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(63, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(bar1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bar2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bar3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bar4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(btnStart)
-                .addContainerGap(72, Short.MAX_VALUE))
-        );
+        btnStop.setText("STOP");
+        btnStop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStopActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnStop, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 130, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-        IntBox box =new IntBox();
+       btnStart.setEnabled(false);
+        listaAtleti.clear();
+        bar1.setValue(0);
+        bar1.setString("Atleta 1: Pronto");
+        bar2.setValue(0);
+        bar2.setString("Atleta 2: In attesa");
+        bar3.setValue(0);
+        bar3.setString("Atleta 3: In attesa");
+        bar4.setValue(0);
+        bar4.setString("Atleta 4: In attesa");
+        box = new IntBox();
         for(int i=1 ; i<=4; i++){
             AtletaStaffetta a =new AtletaStaffetta(i,box);
             a.addObserver(this);
+            listaAtleti.add(a);
             a.start();
         }
     }//GEN-LAST:event_btnStartActionPerformed
+
+    private void btnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopActionPerformed
+        for(AtletaStaffetta a : listaAtleti){
+            a.ferma();
+        }
+         btnStart.setEnabled(true);
+    }//GEN-LAST:event_btnStopActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,6 +141,7 @@ public class StaffettaForm extends javax.swing.JFrame implements Observer {
     private javax.swing.JProgressBar bar3;
     private javax.swing.JProgressBar bar4;
     private javax.swing.JButton btnStart;
+    private javax.swing.JButton btnStop;
     // End of variables declaration//GEN-END:variables
 
     @Override
