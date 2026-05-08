@@ -16,6 +16,7 @@ public class AtletaStaffetta extends Thread implements Subject {
     private Observer o;
     private boolean corre=true;
     private boolean pausa=false;
+    private int sleepTime=50;
 
     public AtletaStaffetta(int atleta, IntBox box) {
         this.atleta = atleta;
@@ -45,19 +46,34 @@ public class AtletaStaffetta extends Thread implements Subject {
             }catch (InterruptedException e) {}
         }
     }
+    
+    
+    public synchronized void velocizza(){
+        if(sleepTime>10){
+            sleepTime-=10;
+        }
+    }
+    
+    public synchronized void rallenta(){
+        sleepTime+=10;
+    }
+    
+    public synchronized int getSleepTime(){
+        return this.sleepTime;
+    }
 
     @Override
     public void run() {
         
         while(box.getValore()!=atleta && deveCorrere()){
             checkPausa();
-          try {Thread.sleep(10);} catch (InterruptedException ex) {System.getLogger(AtletaStaffetta.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);}
+          try {Thread.sleep(getSleepTime());} catch (InterruptedException ex) {System.getLogger(AtletaStaffetta.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);}
         }
         
         for(int i =0; i<=100 && deveCorrere();i++){
             checkPausa();
             try{
-                Thread.sleep(50);
+                Thread.sleep(getSleepTime());
                 notifyObserver(i);
                 
                 if(i==90 && deveCorrere()){

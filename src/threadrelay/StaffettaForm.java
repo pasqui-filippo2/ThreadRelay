@@ -17,6 +17,7 @@ public class StaffettaForm extends javax.swing.JFrame implements Observer {
     private ArrayList<AtletaStaffetta> listaAtleti= new ArrayList<>();
     public StaffettaForm() {
         initComponents();
+        this.setSize(500, 300);
         btnRiprendi.setEnabled(false);
         box=new IntBox();
         this.getContentPane().setBackground(new java.awt.Color(33, 37, 41));
@@ -59,6 +60,8 @@ public class StaffettaForm extends javax.swing.JFrame implements Observer {
         btnStop = new javax.swing.JButton();
         btnPausa = new javax.swing.JButton();
         btnRiprendi = new javax.swing.JButton();
+        btnFaster = new javax.swing.JButton();
+        btnSlower = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -72,7 +75,7 @@ public class StaffettaForm extends javax.swing.JFrame implements Observer {
                 btnStartActionPerformed(evt);
             }
         });
-        getContentPane().add(btnStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 180, 130, -1));
+        getContentPane().add(btnStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 130, -1));
         getContentPane().add(bar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 143, 353, 21));
 
         btnStop.setText("STOP");
@@ -81,7 +84,7 @@ public class StaffettaForm extends javax.swing.JFrame implements Observer {
                 btnStopActionPerformed(evt);
             }
         });
-        getContentPane().add(btnStop, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 130, 20));
+        getContentPane().add(btnStop, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 130, 20));
 
         btnPausa.setText("Ferma");
         btnPausa.addActionListener(new java.awt.event.ActionListener() {
@@ -89,7 +92,7 @@ public class StaffettaForm extends javax.swing.JFrame implements Observer {
                 btnPausaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPausa, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, -1, -1));
+        getContentPane().add(btnPausa, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, -1, -1));
 
         btnRiprendi.setText("Riprendi");
         btnRiprendi.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +100,23 @@ public class StaffettaForm extends javax.swing.JFrame implements Observer {
                 btnRiprendiActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRiprendi, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, -1, -1));
+        getContentPane().add(btnRiprendi, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, -1, -1));
+
+        btnFaster.setText("Velocizza");
+        btnFaster.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFasterActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnFaster, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+
+        btnSlower.setText("Rallenta");
+        btnSlower.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSlowerActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSlower, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 80, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -135,7 +154,6 @@ public class StaffettaForm extends javax.swing.JFrame implements Observer {
             a.inPausa();
         }
          btnPausa.setEnabled(false);
-         btnStart.setEnabled(true);
          btnRiprendi.setEnabled(true);
     }//GEN-LAST:event_btnPausaActionPerformed
 
@@ -148,6 +166,18 @@ public class StaffettaForm extends javax.swing.JFrame implements Observer {
         btnRiprendi.setEnabled(false);
         btnPausa.setEnabled(true);
     }//GEN-LAST:event_btnRiprendiActionPerformed
+
+    private void btnFasterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFasterActionPerformed
+        for(AtletaStaffetta a : listaAtleti){
+            a.velocizza();
+        }
+    }//GEN-LAST:event_btnFasterActionPerformed
+
+    private void btnSlowerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSlowerActionPerformed
+        for(AtletaStaffetta a : listaAtleti){
+            a.rallenta();
+        }
+    }//GEN-LAST:event_btnSlowerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,8 +209,10 @@ public class StaffettaForm extends javax.swing.JFrame implements Observer {
     private javax.swing.JProgressBar bar2;
     private javax.swing.JProgressBar bar3;
     private javax.swing.JProgressBar bar4;
+    private javax.swing.JButton btnFaster;
     private javax.swing.JButton btnPausa;
     private javax.swing.JButton btnRiprendi;
+    private javax.swing.JButton btnSlower;
     private javax.swing.JButton btnStart;
     private javax.swing.JButton btnStop;
     // End of variables declaration//GEN-END:variables
